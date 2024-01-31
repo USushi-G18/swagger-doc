@@ -1,0 +1,140 @@
+paths:
+  admin_login:
+    post:
+      summary: admin login
+      description: admin login
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/token"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  employee_login:
+    post:
+      summary: employee login
+      description: employee login
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/token"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  client_login:
+    post:
+      summary: client login
+      description: client login
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/client_login"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/token"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  change_password:
+    post:
+      summary: change password
+      description: change password
+      tags:
+        - auth
+      parameters:
+        - in: path
+          name: userType
+          schema:
+            type: integer
+          required: true
+          description: the user you want to change password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/change_password"
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    change_password:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          example: "u-sushi"
+        newPassword:
+          type: string
+          example: "u-sushi"
+    client_login:
+      type: object
+      properties:
+        password:
+          type: string
+          example: "u-sushi"
+        tableNumber:
+          type: integer
+          example: 12
+        menu:
+          $ref: "components.yml#/components/schemas/menu"
+        seatings:
+          type: integer
+          example: 4
+    login:
+      type: object
+      properties:
+        password:
+          type: string
+          example: "u-sushi"
+    token:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcyNjM1OTAsImlhdCI6MTcwNjY1ODc5MCwiaXNzIjoidS1zdXNoaSIsInVzZXJUeXBlIjoiQWRtaW4ifQ.oKdVYGfObKPHJXTPYx9c5scKj_p0IrZpZcDd9HaJPv-tZ2iYDBnDCzUKry-P7a_znwXZlyJdjKZYUpc6-V_reDDreCGF9k7_ospLhN5it2CntftOZvdtuTfyLokBb00vkHUxGLB8xEwRUsKaTY3SVjsQVWb-04kHXNu7ft986uVo_Rb9mchxwfBOzMRTQrqSqCASSgX-I-9saLl5t-xnc0cYdQpMReNHIJKGeXw9_rEAzxX466SeuRLnTpQEPAK7NnXsGY-jPVmrgeS5scrCyDLpcN4evpNqLjwYw2H1ATFbQqNrBjY3MazVyLYiWyfG5z0cO7mp89FRUmLr-i9dTw"

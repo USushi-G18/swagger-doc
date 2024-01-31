@@ -1,0 +1,99 @@
+paths:
+  get_category:
+    get:
+      summary: read categories
+      description: read categories
+      tags:
+        - category
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/category"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  category:
+    get:
+      $ref: "#/paths/get_category/get"
+    post:
+      summary: create category
+      description: create category
+      tags:
+        - category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "components.yml#/components/schemas/returningID"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  category_by_id:
+    put:
+      summary: update category
+      description: update category
+      tags:
+        - category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: category id
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+    delete:
+      summary: delete category
+      description: delete category
+      tags:
+        - category
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: category id
+      responses:
+        200:
+          description: OK
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          example: Nigiri

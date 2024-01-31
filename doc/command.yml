@@ -1,0 +1,113 @@
+paths:
+  read_command:
+    get:
+      summary: read command history
+      description: read command history
+      tags:
+        - command
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/command"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  create_command:
+    post:
+      summary: create command
+      description: create command
+      tags:
+        - command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createCommand"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returningAt"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  order_status:
+    put:
+      summary: update order status
+      description: update order status
+      tags:
+        - command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateOrderStatus"
+      responses:
+        200:
+          description: ok
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    command:
+      type: object
+      properties:
+        sessionID:
+          type: integer
+          example: 1
+        plateID:
+          type: integer
+          example: 1
+        at:
+          type: string
+          format: date-time
+          example: "2024-00-00T00:00:00Z"
+        quantity:
+          type: integer
+          example: 2
+        status:
+          $ref: "components.yml#/components/schemas/commandStatus"
+    createCommand:
+      type: object
+      properties:
+        plateID:
+          type: integer
+          example: 1
+        quantity:
+          type: integer
+          example: 2
+    updateOrderStatus:
+      type: object
+      properties:
+        sessionID:
+          type: integer
+          example: 1
+        plateID:
+          type: integer
+          example: 1
+        at:
+          type: string
+          format: date-time
+          example: "2024-00-00T00:00:00Z"
+        status:
+          $ref: "components.yml#/components/schemas/commandStatus"
+    returningAt:
+      type: object
+      properties:
+        at:
+          type: string
+          format: date-time
+          example: "2024-00-00T00:00:00Z"
+      description: used to notify the time of insertion into the db

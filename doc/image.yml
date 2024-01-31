@@ -1,0 +1,100 @@
+paths:
+  get_image:
+    get:
+      summary: read images
+      description: read images
+      tags:
+        - image
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/image"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  image:
+    get:
+      $ref: "#/paths/get_image/get"
+    post:
+      summary: create image
+      description: create image
+      tags:
+        - image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/image"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "components.yml#/components/schemas/returningID"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  image_by_id:
+    put:
+      summary: update image
+      description: update image
+      tags:
+        - image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/image"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: image id
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+    delete:
+      summary: delete image
+      description: delete image
+      tags:
+        - image
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: image id
+      responses:
+        200:
+          description: OK
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    image:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        image:
+          type: string
+          format: byte
+          example: "aW1hZ2UgOyk="

@@ -1,0 +1,55 @@
+components:
+  schemas:
+    returningID:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: error message
+    menu:
+      type: string
+      enum:
+        - Lunch
+        - Dinner
+        - Carte
+      example: Lunch
+    commandStatus:
+      type: string
+      enum:
+        - Ordered
+        - Prepared
+        - Preparing
+        - Delivered
+      example: Ordered
+    sushiUserType:
+      type: string
+      enum:
+        - Admin
+        - Client
+        - Employee
+      example: Admin
+  responses:
+    400:
+      description: BadRequest. Usually due to a parsing error
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/error"
+              - example:
+                  error: "json: unable to parse json"
+    500:
+      description: InternalServerError. This should never happen
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/error"
+              - example:
+                  error: "db: connection refused"

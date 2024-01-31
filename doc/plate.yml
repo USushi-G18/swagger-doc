@@ -1,0 +1,121 @@
+paths:
+  get_plate:
+    get:
+      summary: read plates
+      description: read plates
+      tags:
+        - plate
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/plate"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  plate:
+    get:
+      $ref: "#/paths/get_plate/get"
+    post:
+      summary: create plate
+      description: create plate
+      tags:
+        - plate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plate"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "components.yml#/components/schemas/returningID"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  plate_by_id:
+    put:
+      summary: update plate
+      description: update plate
+      tags:
+        - plate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plate"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: plate id
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+    delete:
+      summary: delete plate
+      description: delete plate
+      tags:
+        - plate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: plate id
+      responses:
+        200:
+          description: OK
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    plate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          example: Nigiri salmone
+        price:
+          type: string
+          example: "2.5"
+        categoryID:
+          type: integer
+          example: 1
+        menu:
+          $ref: "components.yml#/components/schemas/menu"
+        description:
+          type: string
+          nullable: true
+          example: null
+        imageID:
+          type: integer
+          example: 1
+        orderLimit:
+          type: integer
+          nullable: true
+          example: null
+        pieces:
+          type: integer
+          example: 2

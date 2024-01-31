@@ -1,0 +1,93 @@
+paths:
+  get_plate_ingredient:
+    get:
+      summary: read plate ingredients
+      description: read plate ingredients
+      tags:
+        - plate
+        - plate_ingredient
+      parameters:
+        - in: path
+          name: plateID
+          schema:
+            type: integer
+          required: true
+          description: plate id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ingredient.yml#/components/schemas/ingredient"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  plate_ingredient:
+    get:
+      $ref: "#/paths/get_plate_ingredient/get"
+    post:
+      summary: create plate ingredient
+      description: create plate ingredient
+      tags:
+        - plate
+        - plate_ingredient
+      parameters:
+        - in: path
+          name: plateID
+          schema:
+            type: integer
+          required: true
+          description: plate id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plate_ingredient"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "components.yml#/components/schemas/returningID"
+        400:
+          $ref: "components.yml#/components/responses/400"
+        500:
+          $ref: "components.yml#/components/responses/500"
+  plate_ingredient_by_id:
+    delete:
+      summary: delete plate ingredient
+      description: delete plate ingredient
+      tags:
+        - plate
+        - plate_ingredient
+      parameters:
+        - in: path
+          name: plateID
+          schema:
+            type: integer
+          required: true
+          description: plate id
+        - in: path
+          name: ingredientID
+          schema:
+            type: integer
+          required: true
+          description: ingredient id
+      responses:
+        200:
+          description: OK
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    plate_ingredient:
+      type: object
+      properties:
+        ingredientID:
+          type: integer
+          example: 1

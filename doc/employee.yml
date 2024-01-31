@@ -1,0 +1,18 @@
+openapi: 3.0.3
+
+info:
+  title: U-SUSHI api docs employee
+  description: |-
+    This page contains the documentation of all the paths of U-SUSHI api for the user employee
+  version: 0.1.0
+
+servers:
+  - url: /employee
+
+paths:
+  /command:
+    $ref: "command.yml#/paths/read_command"
+  /order-status:
+    $ref: "command.yml#/paths/order_status"
+  /auth/login:
+    $ref: "auth.yml#/paths/employee_login"

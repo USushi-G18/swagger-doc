@@ -1,0 +1,31 @@
+paths:
+  allergen:
+    get:
+      summary: read allergens
+      description: read allergens
+      tags:
+        - allergen
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/allergen"
+        500:
+          $ref: "components.yml#/components/responses/500"
+
+components:
+  schemas:
+    allergen:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          example: Pesce

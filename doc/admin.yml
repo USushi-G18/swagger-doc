@@ -1,0 +1,36 @@
+openapi: 3.0.3
+
+info:
+  title: U-SUSHI api docs admin
+  description: |-
+    This page contains the documentation of all the paths of U-SUSHI api for the user admin
+  version: 0.1.0
+
+servers:
+  - url: /admin
+
+paths:
+  /plate:
+    $ref: "plate.yml#/paths/plate"
+  /plate/{id}:
+    $ref: "plate.yml#/paths/plate_by_id"
+  /plate/{plateID}/ingredient:
+    $ref: "plate_ingredient.yml#/paths/plate_ingredient"
+  /plate/{plateID}/ingredient/{ingredientID}:
+    $ref: "plate_ingredient.yml#/paths/plate_ingredient_by_id"
+  /category:
+    $ref: "category.yml#/paths/category"
+  /category/{id}:
+    $ref: "category.yml#/paths/category_by_id"
+  /image:
+    $ref: "image.yml#/paths/image"
+  /image/{id}:
+    $ref: "image.yml#/paths/image_by_id"
+  /ingredient:
+    $ref: "ingredient.yml#/paths/ingredient"
+  /allergen:
+    $ref: "allergen.yml#/paths/allergen"
+  /auth/login:
+    $ref: "auth.yml#/paths/admin_login"
+  /auth/password/{userType}:
+    $ref: "auth.yml#/paths/change_password"

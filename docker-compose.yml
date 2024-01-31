@@ -1,0 +1,17 @@
+version: '3'
+
+name: swagger-doc
+
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "80:8080"
+    volumes:
+      - ./doc:/usr/share/nginx/html/doc
+    environment:
+      URLS: "[
+          { url: 'doc/admin.yml', name: 'admin-api'}, 
+          { url: 'doc/client.yml', name: 'client-api' },
+          { url: 'doc/employee.yml', name: 'employee-api' }
+        ]"

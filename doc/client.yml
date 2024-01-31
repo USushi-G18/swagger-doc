@@ -1,0 +1,28 @@
+openapi: 3.0.3
+
+info:
+  title: U-SUSHI api docs client
+  description: |-
+    This page contains the documentation of all the paths of U-SUSHI api for the user client
+  version: 0.1.0
+
+servers:
+  - url: /client
+
+paths:
+  /plate:
+    $ref: "plate.yml#/paths/get_plate"
+  /plate/{plateID}/ingredient:
+    $ref: "plate_ingredient.yml#/paths/get_plate_ingredient"
+  /category:
+    $ref: "category.yml#/paths/get_category"
+  /image:
+    $ref: "image.yml#/paths/get_image"
+  /ingredient:
+    $ref: "ingredient.yml#/paths/ingredient"
+  /allergen:
+    $ref: "allergen.yml#/paths/allergen"
+  /command:
+    $ref: "command.yml#/paths/create_command"
+  /auth/login:
+    $ref: "auth.yml#/paths/client_login"
