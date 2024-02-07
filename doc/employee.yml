@@ -16,3 +16,5 @@ paths:
     $ref: "command.yml#/paths/order_status"
   /auth/login:
     $ref: "auth.yml#/paths/employee_login"
+  /session/{sessionID}:
+    $ref: "command.yml#/paths/read_session_by_id"

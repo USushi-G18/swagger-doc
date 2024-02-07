@@ -21,7 +21,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "ingredient.yml#/components/schemas/ingredient"
+                  $ref: "#/components/schemas/plate_ingredient"
         500:
           $ref: "components.yml#/components/responses/500"
   plate_ingredient:

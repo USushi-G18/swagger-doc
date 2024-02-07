@@ -58,6 +58,28 @@ paths:
           $ref: "components.yml#/components/responses/400"
         500:
           $ref: "components.yml#/components/responses/500"
+  read_session_by_id:
+    get:
+      summary: read session
+      description: read session
+      parameters:
+        - in: path
+          name: sessionID
+          schema:
+            type: integer
+          required: true
+          description: session id
+      tags:
+        - command
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/command"
+        500:
+          $ref: "components.yml#/components/responses/500"
 
 components:
   schemas:
@@ -111,3 +133,23 @@ components:
           format: date-time
           example: "2024-00-00T00:00:00Z"
       description: used to notify the time of insertion into the db
+    session:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        startAt:
+          type: string
+          format: date-time
+          example: "2024-00-00T00:00:00Z"
+        endAt:
+          type: string
+          format: date-time
+          example: "2024-00-00T00:30:00Z"
+        tableNumber:
+          type: number
+          example: 1
+        seating:
+          type: number
+          example: 2

@@ -123,7 +123,7 @@ components:
           example: 12
         menu:
           $ref: "components.yml#/components/schemas/menu"
-        seatings:
+        seating:
           type: integer
           example: 4
     login:
